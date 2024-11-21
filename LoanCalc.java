@@ -43,6 +43,7 @@ public class LoanCalc {
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
+		iterationCounter = 0;
 		double g = loan/n;
 		while(endBalance(loan, rate, n, g) > 0){
 			g = g + epsilon;
@@ -60,6 +61,7 @@ public class LoanCalc {
         // Sets L and H to initial values such that f(L) > 0, f(H) < 0,
 		// implying that the function evaluates to zero somewhere between L and H.
 		// So, let’s assume that L and H were set to such initial values.
+		iterationCounter = 0;
 		double lo = loan/n;
 		double hi = loan*Math.pow(rate, n);
 		// Set g to (L + H)/2
