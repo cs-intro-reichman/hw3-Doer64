@@ -69,9 +69,9 @@ public class LoanCalc {
 		while (hi-lo > epsilon) 
 		{
 			if(endBalance(loan, rate, n, g)*endBalance(loan, rate, n, lo) > 0){
-				hi = g;
+				lo = g;
 			}
-			else lo = g;
+			else hi = g;
 
 			// Computes the mid-value (g) for the next iteration
 			g = (lo + hi)/2;
