@@ -53,7 +53,7 @@ public class Algebra {
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		int tSum = x1;
+		int tSum = Math.abs(x1);
 		if(x1 == 0 || x2 == 0){	//if either x1 or x2 is 0 then x1*x2 is 0
 			return 0;
 		} else for(int i = 1; i < Math.abs(x2); i++) {	//calculates the absolute value of x1*x2
