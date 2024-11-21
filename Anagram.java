@@ -30,11 +30,24 @@ public class Anagram {
 	public static boolean isAnagram(String str1, String str2) {
 		str1 = preProcess(str1);
 		str2 = preProcess(str2);
+		String tempStr = "";
+		for(int i = 0; i < str1.length(); i++){		//removes spaces from str1 and str2
+			if(str1.charAt(i) != ' ')
+				tempStr += str1.charAt(i);
+		}
+		str1 = tempStr;
+		tempStr = "";
+		for(int i = 0; i < str2.length(); i++){
+			if(str2.charAt(i) != ' ')
+				tempStr += str2.charAt(i);
+		}
+		str2 = tempStr;
+
 		for(int i = 0; i < str1.length(); i++){
 			char c = str1.charAt(i);
 			if(str2.indexOf(c) == -1) return false; 	//if there is a letter in str1 and not in str2
 			else{
-				String tempStr = "";
+				tempStr = "";
 				for(int j = 0; j < str2.length(); j++){
 					if(j != str2.indexOf(c))
 						tempStr += str2.charAt(j);
@@ -56,7 +69,7 @@ public class Anagram {
 			if('A' <= c && c <= 'Z') {
 				strNew += Character.toLowerCase(c);
 			}
-			else if('a' <= c && c <= 'z'){
+			else if(('a' <= c && c <= 'z')||(c == ' ')){
 				strNew += c;
 			}
 		}
