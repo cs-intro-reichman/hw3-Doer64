@@ -87,15 +87,11 @@ public class Algebra {
 		if(x2 == 0){	//if x2 is 0 then x1/x2 is undefined
 			return 0;
 		}	
-		else if(x2 < 0){ //if x2 is negative then x1/x2 is negative
-			while (times(-x2, plus(divV, 1)) <= x1) {
-				divV++;
-			}
-			divV = -divV;
-		}
-		else while (times(x2, plus(divV, 1)) <= x1) {	//if x2 is positive then x1/x2 is positive
+		else while (times(Math.abs(x2), plus(divV, 1)) <= Math.abs(x1)) {
 			divV++;
 		}
+		if(x1 < 0) divV = -divV;
+		if(x2 < 0) divV = -divV;
 		return divV;
 	}
 
