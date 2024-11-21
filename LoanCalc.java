@@ -63,7 +63,7 @@ public class LoanCalc {
 		// So, let’s assume that L and H were set to such initial values.
 		iterationCounter = 0;
 		double lo = loan/n;
-		double hi = loan*Math.pow(rate, n);
+		double hi = loan;
 		// Set g to (L + H)/2
 		double g = (lo + hi)/2;
 		while (hi-lo > epsilon) 
