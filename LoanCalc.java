@@ -28,8 +28,13 @@ public class LoanCalc {
 	// Computes the ending balance of a loan, given the loan amount, the periodical
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
-		// Replace the following statement with your code
-		return 0;
+		double balance = loan;
+		double rateNum = 1 + (rate/100.0);
+		for(int i = 0; i < n && balance > 0; i++){
+			balance = (balance - payment) * rateNum;
+		}
+		if(balance<0) balance = 0;
+		return (balance<0) ? 0 : balance;
 	}
 	
 	// Uses sequential search to compute an approximation of the periodical payment
@@ -38,8 +43,13 @@ public class LoanCalc {
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
-		// Replace the following statement with your code
-		return 0;
+		iterationCounter = 0;
+		double g = loan/n;
+		while(endBalance(loan, rate, n, g) > 0){
+			g = g + epsilon;
+			iterationCounter++;
+		}
+		return g;
     }
     
     // Uses bisection search to compute an approximation of the periodical payment 
@@ -48,7 +58,26 @@ public class LoanCalc {
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-        // Replace the following statement with your code
-		return 0;
-    }
+        // Sets L and H to initial values such that f(L) > 0, f(H) < 0,
+		// implying that the function evaluates to zero somewhere between L and H.
+		// So, let’s assume that L and H were set to such initial values.
+		iterationCounter = 0;
+		double lo = loan/n;
+		double hi = loan;
+		// Set g to (L + H)/2
+		double g = (lo + hi)/2;
+		while (hi-lo > epsilon) 
+		{
+			if(endBalance(loan, rate, n, g)*endBalance(loan, rate, n, lo) > 0){
+				lo = g;
+			}
+			else hi = g;
+
+			// Computes the mid-value (g) for the next iteration
+			g = (lo + hi)/2;
+			
+			iterationCounter++;
+		}
+		return g;
+	}
 }

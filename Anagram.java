@@ -28,22 +28,71 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		str1 = preProcess(str1);
+		str2 = preProcess(str2);
+		String tempStr = "";
+		for(int i = 0; i < str1.length(); i++){		//removes spaces from str1 and str2
+			if(str1.charAt(i) != ' ')
+				tempStr += str1.charAt(i);
+		}
+		str1 = tempStr;
+		tempStr = "";
+		for(int i = 0; i < str2.length(); i++){
+			if(str2.charAt(i) != ' ')
+				tempStr += str2.charAt(i);
+		}
+		str2 = tempStr;
+
+		for(int i = 0; i < str1.length(); i++){
+			char c = str1.charAt(i);
+			if(str2.indexOf(c) == -1) return false; 	//if there is a letter in str1 and not in str2
+			else{
+				tempStr = "";
+				for(int j = 0; j < str2.length(); j++){
+					if(j != str2.indexOf(c))
+						tempStr += str2.charAt(j);
+				}
+				str2 = tempStr;
+			}
+		}
+		if(str2.equals("")) return true;	//if all the letters in str1 are in str2 then str2 should be emptied
+		else return false;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
-	} 
+		String strNew = "";
+		for(int i = 0; i < str.length(); i++) {
+			char c = str.charAt(i);
+			if('A' <= c && c <= 'Z') {
+				strNew += Character.toLowerCase(c);
+			}
+			else if(('a' <= c && c <= 'z')||(c == ' ')){
+				strNew += c;
+			}
+		}
+		return strNew;
+	}
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		str = preProcess(str);
+		String endStr = "";
+		while(!str.equals(""))
+		{
+			int index = (int) (Math.random()*(str.length()-1));	//gives a random index in str
+			char c = str.charAt(index);
+			endStr += c;
+			String newStr = "";
+			for(int i = 0; i < str.length(); i++){
+				if(i != index)
+					newStr += str.charAt(i);
+			}
+			str = newStr;
+		}
+		return endStr;
 	}
 }
